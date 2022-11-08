@@ -1,0 +1,10 @@
+$borderColor: #cacaca;
+.column {
+  flex: 0 0 277px;
+}
+.tasks {
+  padding: calc(14em / 16);
+  border-radius: 7px;
+  border: 1px solid $borderColor;
+  min-height: 28px;
+}

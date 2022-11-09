@@ -9,9 +9,9 @@ export const Home = () => {
     <div className={cn(styles.container)}>
       <Filters />
       <div className={cn(styles.columns)}>
-        <Column title='Todo' />
-        <Column title='In Progress' />
-        <Column title='Done' />
+        <Column title='Todo' type='todo' />
+        <Column title='In Progress' type='inProgress' />
+        <Column title='Done' type='done' />
       </div>
     </div>
   )

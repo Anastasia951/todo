@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 export type TId = string
-interface ITicket {
+export interface ITicket {
   title: string
   description: string
   tags: string[]
@@ -9,15 +9,36 @@ interface ITicket {
 
 interface ITicketsState {
   tickets: Record<TId, ITicket>
+  // ids: TId[]
   todo: TId[]
   done: TId[]
   inProgress: TId[]
 }
 const initialState: ITicketsState = {
-  tickets: {},
-  todo: [],
+  tickets: {
+    xqws: {
+      title: 'jkjkj',
+      description: 'Description',
+      tags: ['yellow', 'green'],
+      commentsIds: [],
+    },
+    adfv: {
+      title: 'dfdfd',
+      description: 'Description',
+      tags: ['yellow', 'green'],
+      commentsIds: [],
+    },
+    wefv: {
+      title: 'dfdrerer',
+      description: 'Description',
+      tags: ['yellow', 'green'],
+      commentsIds: [],
+    },
+  },
+  todo: ['xqws', 'adfv'],
   done: [],
-  inProgress: [],
+  inProgress: ['wefv'],
+  // ids: ['xqws', 'adfv', 'wevf'],
 }
 const filtersReducer = createSlice({
   name: 'tickets',

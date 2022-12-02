@@ -1,18 +1,30 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-export type TFilter = 'all' | 'todo' | 'inProgress' | 'done'
+// export type TFilter = 'all' | 'todo' | 'inProgress' | 'done'
 
 interface IFiltersState {
-  field: TFilter
+  comment: boolean
+  description: boolean
+  tag: boolean
 }
 
+export type TFilter = keyof IFiltersState
+
 const initialState: IFiltersState = {
-  field: 'all',
+  comment: false,
+  description: false,
+  tag: false,
 }
 const filtersReducer = createSlice({
   name: 'filters',
   initialState,
-  reducers: {},
+  reducers: {
+    changeField(state, { payload }: PayloadAction<TFilter>) {
+      state[payload] = !state[payload]
+    },
+  },
 })
 
 export default filtersReducer.reducer
+
+export const { changeField } = filtersReducer.actions

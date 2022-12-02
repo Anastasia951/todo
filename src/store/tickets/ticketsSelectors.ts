@@ -15,10 +15,11 @@ export const getDoneTicketsIds = (state: AppState): TId[] => state.tickets.done
 export const getTicketById = (id: TId) => (state: AppState) =>
   state.tickets.tickets[id]
 
-export const getTicketsByType = (type: TFilter) => (state: AppState) => {
-  if (type === 'todo') return getTodoTicketsIds(state)
-  if (type === 'inProgress') return getInProgressTicketsIds(state)
-  if (type === 'done') return getDoneTicketsIds(state)
+export const getTicketsByType =
+  (type: 'todo' | 'inProgress' | 'done') => (state: AppState) => {
+    if (type === 'todo') return getTodoTicketsIds(state)
+    if (type === 'inProgress') return getInProgressTicketsIds(state)
+    if (type === 'done') return getDoneTicketsIds(state)
 
-  return getAllTicketsIds(state)
-}
+    return getAllTicketsIds(state)
+  }

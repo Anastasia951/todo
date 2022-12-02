@@ -1,14 +1,13 @@
 import React from 'react'
 import cn from 'classnames'
 import styles from './Column.module.scss'
-import { TFilter } from '../../store/filters/filtersReducer'
 import { useSelector } from 'react-redux'
 import { getTicketsByType } from '../../store/tickets/ticketsSelectors'
 import { Ticket } from '../Ticket/Ticket'
 
 interface IColumnProps {
   title: string
-  type?: TFilter
+  type?: 'todo' | 'inProgress' | 'done'
 }
 
 export const Column = ({ title = '', type = 'todo' }: IColumnProps) => {

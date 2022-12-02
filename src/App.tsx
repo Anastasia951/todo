@@ -7,7 +7,6 @@ import { NotFound } from './pages/NotFound/NotFound'
 function App() {
   return (
     <Routes>
-      {/* <Route path='/' element={<TestComponent />}></Route> */}
       <Route path='/' element={<Home />}></Route>
       <Route path='/full/:ticketId' element={<FullTicket />}></Route>
       <Route path='*' element={<NotFound />}></Route>

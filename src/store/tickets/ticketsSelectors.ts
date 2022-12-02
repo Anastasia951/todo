@@ -1,8 +1,7 @@
 import { AppState } from '../store'
 import { TFilter } from '../filters/filtersReducer'
-import { ITicket, TId } from './ticketsReducer'
-// import { createSelector } from 'reselect'
-// export const getTodoTicketsIds = (state: AppState) => state.tickets.todo
+import { TId } from './ticketsReducer'
+
 export const getAllTicketsIds = (state: AppState) => [
   ...state.tickets.todo,
   ...state.tickets.inProgress,

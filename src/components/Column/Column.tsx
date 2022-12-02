@@ -15,8 +15,8 @@ export const Column = ({ title = '', type = 'todo' }: IColumnProps) => {
   const tikcetsIds = useSelector(getTicketsByType(type))
   return (
     <div className={cn(styles.column)}>
-      <h4>{title}</h4>
-      <div className={cn(styles.tasks)}>
+      <h4 className={cn(styles.title)}>{title}</h4>
+      <div className={cn(styles.tickets)}>
         {tikcetsIds.map(id => (
           <Ticket ticketId={id} key={id} />
         ))}

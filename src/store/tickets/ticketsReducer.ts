@@ -19,8 +19,8 @@ const initialState: ITicketsState = {
     xqws: {
       title: 'jkjkj',
       description: 'Description',
-      tags: ['yellow', 'green'],
-      commentsIds: [],
+      tags: ['yellow', 'green', 'red', 'violet', 'lightBlue'],
+      commentsIds: ['sdsd', 'sddff'],
     },
     adfv: {
       title: 'dfdfd',
@@ -31,7 +31,7 @@ const initialState: ITicketsState = {
     wefv: {
       title: 'dfdrerer',
       description: 'Description',
-      tags: ['yellow', 'green'],
+      tags: ['yellow', 'darkBlue'],
       commentsIds: [],
     },
   },

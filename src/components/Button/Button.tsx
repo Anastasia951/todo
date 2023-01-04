@@ -3,9 +3,18 @@ import cn from 'classnames'
 import styles from './Button.module.scss'
 interface ButtonProps {
   children?: React.ReactNode
-  type: string
+  variant: string
+  onClick?: () => void
 }
 
-export function Button({ children, type = 'default' }: ButtonProps) {
-  return <button className={cn(styles.button, styles[type])}>{children}</button>
+export function Button({
+  children,
+  variant = 'default',
+  ...props
+}: ButtonProps) {
+  return (
+    <button {...props} className={cn(styles.button, styles[variant])}>
+      {children}
+    </button>
+  )
 }

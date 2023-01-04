@@ -1,0 +1,8 @@
+.form {
+  border: 1px solid #cacaca;
+  border-radius: 7px;
+  padding: calc(14rem / 16);
+  & > *:not(:last-child) {
+    margin-bottom: calc(14rem / 16);
+  }
+}

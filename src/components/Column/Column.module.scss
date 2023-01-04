@@ -3,7 +3,6 @@ $borderColor: #cacaca;
   flex: 0 0 277px;
 }
 .tickets {
-  border-radius: 7px;
   min-height: 28px;
   & > *:not(:last-child) {
     margin-bottom: calc(10rem / 16);
@@ -20,6 +19,7 @@ $borderColor: #cacaca;
 .bordered {
   border: 1px solid $borderColor;
   padding: calc(14em / 16);
+  border-radius: 7px;
   & > *:not(:last-child) {
     margin-bottom: calc(10rem / 16);
   }

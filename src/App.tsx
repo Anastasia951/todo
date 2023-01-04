@@ -6,11 +6,15 @@ import { NotFound } from './pages/NotFound/NotFound'
 
 function App() {
   return (
-    <Routes>
-      <Route path='/' element={<Home />}></Route>
-      <Route path='/full/:ticketId' element={<FullTicket />}></Route>
-      <Route path='*' element={<NotFound />}></Route>
-    </Routes>
+    <>
+      <Routes>
+        <Route path='/' element={<Home />}></Route>
+        <Route path='/full/:ticketId' element={<FullTicket />}></Route>
+        <Route path='*' element={<NotFound />}></Route>
+      </Routes>
+
+      <div className='modal-container'></div>
+    </>
   )
 }
 

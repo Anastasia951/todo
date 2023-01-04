@@ -3,9 +3,7 @@ $borderColor: #cacaca;
   flex: 0 0 277px;
 }
 .tickets {
-  padding: calc(14em / 16);
   border-radius: 7px;
-  border: 1px solid $borderColor;
   min-height: 28px;
   & > *:not(:last-child) {
     margin-bottom: calc(10rem / 16);
@@ -18,4 +16,20 @@ $borderColor: #cacaca;
   font-size: 16px;
   line-height: calc(19 / 16);
   color: #333333;
+}
+.bordered {
+  border: 1px solid $borderColor;
+  padding: calc(14em / 16);
+  & > *:not(:last-child) {
+    margin-bottom: calc(10rem / 16);
+  }
+}
+button {
+  width: 100%;
+  padding: calc(14rem / 16) 5px;
+}
+.plus {
+  display: inline-block;
+  margin-right: 7px;
+  font-size: 18px;
 }

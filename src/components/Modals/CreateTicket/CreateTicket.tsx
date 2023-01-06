@@ -3,8 +3,26 @@ import modalStyles from './CreateTicket.module.scss'
 import { Input } from '../../Input/Input'
 import { Button } from '../../Button/Button'
 import { MultiSelect } from '../../MultiSelect/MultiSelect'
+import { createTicket } from '../../../store/tickets/ticketsReducer'
+import { useDispatch } from 'react-redux'
+import { useRedirect } from '../../../hooks/useRedirect'
 const styles = Object.assign(modalStyles, defaultStyles)
 export const CreateTicket = () => {
+  const redirect = useRedirect('/')
+  const dispatch = useDispatch()
+  function createTicketHandler() {
+    dispatch(
+      createTicket({
+        title: 'title',
+        description: 'dfdefd',
+        commentsIds: [],
+        tags: [],
+        type: 'inProgress',
+      })
+    )
+
+    redirect()
+  }
   return (
     <div className={styles.content}>
       <h4 className={styles.title}>Создать тикет</h4>
@@ -12,7 +30,9 @@ export const CreateTicket = () => {
         <Input fullWidth placeholder='Название' />
         <Input fullWidth placeholder='Описание' multiline />
         <MultiSelect />
-        <Button variant='primary'>Сохранить</Button>
+        <Button variant='primary' onClick={createTicketHandler}>
+          Сохранить
+        </Button>
       </form>
     </div>
   )

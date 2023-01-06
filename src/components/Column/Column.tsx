@@ -7,6 +7,7 @@ import { Ticket } from '../Ticket/Ticket'
 import { Button } from '../Button/Button'
 import { CreateTicket } from '../Modals/CreateTicket/CreateTicket'
 import { ModalWrapper } from '../Modals/ModalWrapper'
+import { Outlet } from 'react-router-dom'
 
 interface IColumnProps {
   title: string
@@ -36,7 +37,7 @@ export const Column = ({ title = '', type = 'todo' }: IColumnProps) => {
           )}
         </div>
       </div>
-      {isModalOpen && <ModalWrapper type='create' />}
+      {isModalOpen && <Outlet />}
     </>
   )
 }

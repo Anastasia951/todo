@@ -1,0 +1,42 @@
+.container {
+  max-width: 1230px;
+  padding: 37px 15px 0 15px;
+  margin: 0 auto;
+}
+.link {
+  display: flex;
+  align-items: center;
+  img {
+    margin-right: calc(20rem / 16);
+  }
+}
+.nav {
+  margin-bottom: calc(74rem / 16);
+}
+.title {
+  margin-bottom: calc(14rem / 16);
+  font-weight: 500;
+  line-height: calc(19 / 16);
+  padding-left: calc(26rem / 16);
+}
+.ticket {
+  border: 1px solid #cacaca;
+  border-radius: 7px;
+  padding: calc(14rem / 16);
+  max-width: 470px;
+  width: 100%;
+  & > * {
+    width: 100%;
+    &:not(:last-child) {
+      margin-bottom: calc(14rem / 16);
+    }
+  }
+}
+.colors {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fit, 60px);
+  & > * {
+    height: calc(24rem / 16);
+  }
+}

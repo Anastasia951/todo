@@ -1,4 +1,3 @@
-import ReactDOM from 'react-dom'
 import defaultStyles from '../Modal.module.scss'
 import modalStyles from './CreateTicket.module.scss'
 import { Input } from '../../Input/Input'

@@ -1,9 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { v4 as uuid } from 'uuid'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { TId } from '../tickets/ticketsReducer'
 
 interface IComment {
   text: string
-  author: string[]
+  author: string
   ticketId: TId
 }
 interface ICommentsState {
@@ -11,13 +12,29 @@ interface ICommentsState {
 }
 
 const initialState: ICommentsState = {
-  comments: {},
+  comments: {
+    sdsd: {
+      text: 'ewrwerwer',
+      author: 'me',
+      ticketId: 'xqws',
+    },
+    sddff: {
+      text: 'asdasd',
+      author: 'me',
+      ticketId: 'xqws',
+    },
+  },
 }
 
 const commentsReducer = createSlice({
   name: 'comments',
   initialState,
-  reducers: {},
+  reducers: {
+    addComment(state, { payload }: PayloadAction<IComment>) {
+      let commentId = uuid()
+      state.comments[commentId] = payload
+    },
+  },
 })
 
 export default commentsReducer.reducer

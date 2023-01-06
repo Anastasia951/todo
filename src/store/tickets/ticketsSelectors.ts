@@ -1,5 +1,5 @@
 import { AppState } from '../store'
-import { TFilter } from '../filters/filtersReducer'
+// import { TFilter } from '../filters/filtersReducer'
 import { TId } from './ticketsReducer'
 
 export const getAllTicketsIds = (state: AppState) => [

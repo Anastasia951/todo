@@ -1,18 +1,33 @@
 import ReactDOM from 'react-dom'
-import { useMemo } from 'react'
+import { useEffect, useState } from 'react'
 import { CreateTicket } from './CreateTicket/CreateTicket'
 import styles from './ModalWrapper.module.scss'
 import close from '../../assets/close.svg'
 import { Link } from 'react-router-dom'
+import { EditTicket } from './EditTIcket/EditTicket'
 interface ModalWrapper {
   type: string
 }
 export const ModalWrapper = ({ type }: ModalWrapper) => {
-  const Element = CreateTicket
-  const container = useMemo(
-    () => document.querySelector('.modal-container'),
-    []
-  )
+  let Element = CreateTicket
+  switch (type) {
+    case 'create': {
+      Element = CreateTicket
+      break
+    }
+    case 'edit': {
+      Element = EditTicket
+      break
+    }
+    default: {
+      Element = CreateTicket
+    }
+  }
+  const [isDOMReady, setIsDOMReady] = useState(false)
+  useEffect(() => {
+    setIsDOMReady(true)
+  }, [])
+  let container = isDOMReady ? document.querySelector('.modal-container') : null
   return (
     container &&
     ReactDOM.createPortal(

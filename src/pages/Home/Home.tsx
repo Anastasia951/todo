@@ -4,6 +4,7 @@ import cn from 'classnames'
 import { Filters } from '../../components/Filters/Filters'
 import styles from './Home.module.scss'
 import { Column } from '../../components/Column/Column'
+import { Outlet } from 'react-router-dom'
 export const Home = () => {
   return (
     <div className={cn(styles.container)}>
@@ -13,6 +14,7 @@ export const Home = () => {
         <Column title='In Progress' type='inProgress' />
         <Column title='Done' type='done' />
       </div>
+      <Outlet />
     </div>
   )
 }

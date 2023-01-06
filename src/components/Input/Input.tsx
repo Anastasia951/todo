@@ -6,6 +6,7 @@ interface IInputProps {
   multiline: boolean
   fullWidth: boolean
   placeholder: string
+  value: string
 }
 export const Input = ({
   multiline = false,

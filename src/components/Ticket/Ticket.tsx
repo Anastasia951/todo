@@ -17,7 +17,7 @@ export const Ticket = ({ ticketId }: ITicketProps) => {
     getTicketById(ticketId)
   )
   return (
-    <div className={cn(styles.ticket)}>
+    <Link to={`edit/${ticketId}`} className={cn(styles.ticket)}>
       <h5 className={cn(styles.title)}>{title}</h5>
       <Link className={cn(styles.link)} to={`/full/${ticketId}`}>
         <span className={cn(styles.openTicket)}></span>
@@ -33,6 +33,6 @@ export const Ticket = ({ ticketId }: ITicketProps) => {
           <img src={hasComments} alt='has comments' />
         )}
       </div>
-    </div>
+    </Link>
   )
 }

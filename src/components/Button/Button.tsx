@@ -1,10 +1,8 @@
 import React from 'react'
 import cn from 'classnames'
 import styles from './Button.module.scss'
-interface ButtonProps {
-  children?: React.ReactNode
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant: string
-  onClick?: () => void
 }
 
 export function Button({

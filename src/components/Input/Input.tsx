@@ -2,7 +2,7 @@ import React from 'react'
 import cn from 'classnames'
 import styles from './Input.module.scss'
 
-interface IInputProps {
+interface IInputProps extends React.InputHTMLAttributes<HTMLElement> {
   multiline: boolean
   fullWidth: boolean
   placeholder: string

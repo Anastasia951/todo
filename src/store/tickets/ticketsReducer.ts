@@ -49,12 +49,10 @@ const ticketsReducer = createSlice({
     createTicket(state, { payload }: PayloadAction<ITicket>) {
       let id = uuid()
       state.tickets[id] = payload
-      if (payload.type) {
-        if (payload.type === 'inProgress') {
-          state.inProgress.push(id)
-        } else {
-          state.todo.push(id)
-        }
+      if (payload.type === 'inProgress') {
+        state.inProgress.push(id)
+      } else {
+        state.todo.push(id)
       }
     },
   },

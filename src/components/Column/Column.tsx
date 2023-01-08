@@ -14,7 +14,7 @@ interface IColumnProps {
 
 export const Column = ({ title = '', type = 'todo' }: IColumnProps) => {
   const tikcetsIds = useSelector(getTicketsByType(type))
-  const redirect = useRedirect('create')
+  const redirect = useRedirect('create', { type })
   return (
     <div className={cn(styles.column)}>
       <h4 className={cn(styles.title)}>{title}</h4>

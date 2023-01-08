@@ -13,7 +13,6 @@ export const CreateTicket = () => {
   const redirect = useRedirect('/')
   const dispatch = useDispatch()
   const { state } = useLocation()
-  console.log(state)
   const formik = useFormik({
     initialValues: {
       title: '',

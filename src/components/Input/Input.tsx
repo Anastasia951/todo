@@ -8,16 +8,18 @@ interface IInputProps extends React.InputHTMLAttributes<HTMLElement> {
   placeholder: string
   value: string
 }
+
 export const Input = ({
   multiline = false,
   fullWidth = false,
+  className,
   ...props
 }: Partial<IInputProps>) => {
   if (multiline) {
     return (
       <textarea
         rows={5}
-        className={cn(styles.input, styles.multiline, {
+        className={cn([className], styles.input, styles.multiline, {
           [styles.fullWidth]: fullWidth,
         })}
         {...props}
@@ -27,7 +29,7 @@ export const Input = ({
   return (
     <input
       {...props}
-      className={cn(styles.input, styles.oneline, {
+      className={cn([className], styles.input, styles.oneline, {
         [styles.fullWidth]: fullWidth,
       })}
     />

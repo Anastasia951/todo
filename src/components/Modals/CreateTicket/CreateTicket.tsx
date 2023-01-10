@@ -1,3 +1,5 @@
+import * as Yup from 'yup'
+import cn from 'classnames'
 import defaultStyles from '../Modal.module.scss'
 import modalStyles from './CreateTicket.module.scss'
 import { Input } from '../../Input/Input'
@@ -9,15 +11,22 @@ import { useRedirect } from '../../../hooks/useRedirect'
 import { useFormik } from 'formik'
 import { useLocation } from 'react-router-dom'
 const styles = Object.assign(modalStyles, defaultStyles)
+
 export const CreateTicket = () => {
   const redirect = useRedirect('/')
   const dispatch = useDispatch()
   const { state } = useLocation()
+
+  const validationSchema = Yup.object().shape({
+    title: Yup.string().required(),
+    description: Yup.string().required(),
+  })
   const formik = useFormik({
     initialValues: {
       title: '',
       description: '',
     },
+    validationSchema,
     onSubmit: values => {
       dispatch(
         createTicket({
@@ -30,6 +39,8 @@ export const CreateTicket = () => {
       redirect()
     },
   })
+
+  console.log(styles)
   return (
     <div className={styles.content}>
       <h4 className={styles.title}>Создать тикет</h4>
@@ -40,6 +51,9 @@ export const CreateTicket = () => {
           onChange={formik.handleChange}
           fullWidth
           placeholder='Название'
+          className={cn({
+            [styles.required]: formik.touched.title && formik.errors.title,
+          })}
         />
         <Input
           name='description'

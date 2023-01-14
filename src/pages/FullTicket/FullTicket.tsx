@@ -19,22 +19,20 @@ export const FullTicket = () => {
           Вернуться к задачам
         </Link>
       </nav>
-      <div>
-        <h4 className={styles.title}>{ticket.title}</h4>
-        <div className={styles.ticket}>
-          <Input value={ticket.title} />
-          <Input value={ticket.description} multiline />
-          <div className={styles.colors}>
-            {ticket.tags.map(color => (
-              <Tag color={color} key={color} />
-            ))}
-          </div>
+      <h4 className={styles.title}>{ticket.title}</h4>
+      <div className={styles.ticket}>
+        <Input value={ticket.title} />
+        <Input value={ticket.description} multiline />
+        <div className={styles.colors}>
+          {ticket.tags.map(color => (
+            <Tag color={color} key={color} />
+          ))}
+        </div>
 
-          <div className={styles.comments}>
-            {ticket.commentsIds.map(id => (
-              <Comment id={id} />
-            ))}
-          </div>
+        <div className={styles.comments}>
+          {ticket.commentsIds.map(id => (
+            <Comment id={id} />
+          ))}
         </div>
       </div>
     </div>

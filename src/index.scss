@@ -17,3 +17,13 @@ label,
 button {
   cursor: pointer;
 }
+::-webkit-scrollbar {
+  width: 6px;
+  background: #eaeaea;
+  border-radius: 3px;
+  display: block;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(182, 182, 182, 0.99);
+  border-radius: 3px;
+}

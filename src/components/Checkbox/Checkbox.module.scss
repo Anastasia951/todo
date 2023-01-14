@@ -1,8 +1,12 @@
+// TODO: fix hidden input
+
 .input {
   appearance: none;
   position: relative;
   display: flex;
   align-items: center;
+  width: calc(1rem + 2px);
+  height: calc(1rem + 2px);
   &:checked {
     &::before {
       content: url(../../assets/arrow.svg);

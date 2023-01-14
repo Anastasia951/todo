@@ -1,0 +1,44 @@
+.multiSelect {
+  position: relative;
+  max-width: 168px;
+}
+.wrapper {
+  position: absolute;
+  background: #d8d7d7;
+  border-radius: 0px 0px 3px 3px;
+  width: 100%;
+  padding: calc(10rem / 16);
+}
+.scroll {
+  padding-right: 10px;
+}
+.item {
+  width: 100%;
+  &:not(:last-child) {
+    margin-bottom: calc(10rem / 16);
+  }
+  & > * {
+    height: 24px;
+  }
+}
+.scroll {
+  overflow-y: scroll;
+  max-height: 146px;
+}
+
+.dropdown {
+  text-align: left;
+  align-self: start;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  span img {
+    transform: rotate(90deg);
+    transition: transform 0.1s ease;
+  }
+}
+.opened {
+  span img {
+    transform: rotate(0);
+  }
+}

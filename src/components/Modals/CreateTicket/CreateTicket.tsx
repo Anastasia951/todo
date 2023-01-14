@@ -19,28 +19,28 @@ export const CreateTicket = () => {
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required(),
-    description: Yup.string().required(),
+    description: Yup.string(),
   })
   const formik = useFormik({
     initialValues: {
       title: '',
       description: '',
+      tags: [],
     },
     validationSchema,
     onSubmit: values => {
       dispatch(
         createTicket({
           ...values,
-          tags: [],
           commentsIds: [],
           type: state?.type,
         })
       )
+      console.log(values)
       redirect()
     },
   })
 
-  console.log(styles)
   return (
     <div className={styles.content}>
       <h4 className={styles.title}>Создать тикет</h4>
@@ -63,7 +63,7 @@ export const CreateTicket = () => {
           placeholder='Описание'
           multiline
         />
-        <MultiSelect />
+        <MultiSelect formik={formik} />
         <Button variant='primary' type='submit'>
           Сохранить
         </Button>

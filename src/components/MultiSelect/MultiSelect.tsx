@@ -16,11 +16,16 @@ const colors = [
   'yellow',
 ]
 
-export const MultiSelect = () => {
+interface IMultiSelectProps {
+  formik?: any
+}
+
+export const MultiSelect = ({ formik }: IMultiSelectProps) => {
   const [isOpened, setIsOpened] = useState(false)
   return (
     <div className={styles.multiSelect}>
       <Button
+        type='button'
         onClick={() => setIsOpened(p => !p)}
         className={cn(styles.dropdown, {
           [styles.opened]: isOpened,
@@ -36,8 +41,12 @@ export const MultiSelect = () => {
           <div className={styles.scroll}>
             <ul className={styles.list}>
               {colors.map(color => (
-                <li className={styles.item}>
-                  <Checkbox contentOnLeft>
+                <li key={color} className={styles.item}>
+                  <Checkbox
+                    formik={formik}
+                    name='tags'
+                    value={color}
+                    contentOnLeft>
                     <Tag color={color} />
                   </Checkbox>
                 </li>

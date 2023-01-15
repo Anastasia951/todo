@@ -61,7 +61,7 @@ export const CreateTicket = () => {
           placeholder='Описание'
           multiline
         />
-        <MultiSelect formik={formik} />
+        <MultiSelect formik={formik} values={formik.values.tags} />
         <Button variant='primary' type='submit'>
           Сохранить
         </Button>

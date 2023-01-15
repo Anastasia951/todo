@@ -1,3 +1,4 @@
+$bg: '../../assets/deleteTag.svg';
 $violet: #eee1fd;
 $green: #baf8cf;
 $red: #fed6cc;
@@ -39,4 +40,19 @@ $yellow: #fff4c7;
 }
 .yellow {
   background-color: $yellow;
+}
+.editable {
+  position: relative;
+  img {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    padding: 5px;
+    display: none;
+  }
+  &:hover {
+    img {
+      display: block;
+    }
+  }
 }

@@ -10,7 +10,8 @@ import { useFormik } from 'formik'
 import { editTicket } from '../../../store/tickets/ticketsReducer'
 import { useRedirect } from '../../../hooks/useRedirect'
 import * as Yup from 'yup'
-import { INewTicket } from '../../../models/TStore'
+import { INewTicket, TColor } from '../../../models/TStore'
+import { Tag } from '../../Tag/Tag'
 const styles = Object.assign(modalStyles, defaultStyles)
 
 export const EditTicket = () => {
@@ -34,6 +35,13 @@ export const EditTicket = () => {
       redirect()
     },
   })
+
+  function deleteTag(color: TColor) {
+    formik.setFieldValue(
+      'tags',
+      formik.values.tags.filter(tag => tag !== color)
+    )
+  }
   return (
     <div className={styles.content}>
       <h4 className={styles.title}>Редактировать тикет</h4>
@@ -51,6 +59,11 @@ export const EditTicket = () => {
           value={formik.values.description}
           multiline
         />
+        <div className={styles.tags}>
+          {formik.values.tags.map(color => (
+            <Tag key={color} color={color} onDelete={deleteTag} editable />
+          ))}
+        </div>
         <MultiSelect formik={formik} values={formik.values.tags} />
         <Button variant='primary' type='submit'>
           Сохранить

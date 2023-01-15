@@ -19,6 +19,7 @@ export const Checkbox = ({
     <label className={cn(styles.label)}>
       {contentOnLeft && children}
       <input
+        // defaultChecked={checked}
         checked={checked}
         value={value}
         onChange={onChange}

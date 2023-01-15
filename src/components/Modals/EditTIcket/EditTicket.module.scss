@@ -6,3 +6,10 @@
     margin-bottom: calc(14rem / 16);
   }
 }
+
+.tags {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  grid-auto-rows: calc(24rem / 16);
+}

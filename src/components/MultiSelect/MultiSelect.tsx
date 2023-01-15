@@ -1,20 +1,11 @@
 import React, { useState } from 'react'
+import { colors } from '../../models/TStore'
 import { Button } from '../Button/Button'
 import { Checkbox } from '../Checkbox/Checkbox'
 import { Tag } from '../Tag/Tag'
 import dropdown from '../../assets/dropdown.svg'
 import styles from './MultiSelect.module.scss'
 import cn from 'classnames'
-const colors = [
-  'violet',
-  'green',
-  'red',
-  'lightBlue',
-  'orange',
-  'lightGreen',
-  'darkBlue',
-  'yellow',
-]
 
 interface IMultiSelectProps {
   formik?: any

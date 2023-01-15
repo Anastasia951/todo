@@ -29,11 +29,13 @@ export const FullTicket = () => {
           ))}
         </div>
 
-        <div className={styles.comments}>
-          {ticket.commentsIds.map(id => (
-            <Comment id={id} />
-          ))}
-        </div>
+        {ticket.commentsIds && (
+          <div className={styles.comments}>
+            {ticket.commentsIds.map(id => (
+              <Comment id={id} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )

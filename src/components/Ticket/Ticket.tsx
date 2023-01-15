@@ -29,9 +29,7 @@ export const Ticket = ({ ticketId }: ITicketProps) => {
       </div>
       <div className={cn(styles.info)}>
         {description && <img src={hasDescription} alt='has description' />}
-        {Boolean(commentsIds.length) && (
-          <img src={hasComments} alt='has comments' />
-        )}
+        {Boolean(commentsIds) && <img src={hasComments} alt='has comments' />}
       </div>
     </Link>
   )

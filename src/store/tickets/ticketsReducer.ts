@@ -1,14 +1,7 @@
 import { v4 as uuid } from 'uuid'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { INewTicket, ITicket } from '../../models/TStore'
 export type TId = string
-export interface ITicket {
-  id?: TId
-  title: string
-  description: string
-  tags: string[]
-  commentsIds: string[]
-  type?: 'todo' | 'inProgress'
-}
 
 interface ITicketsState {
   tickets: Record<TId, ITicket>
@@ -20,48 +13,45 @@ interface ITicketsState {
 const initialState: ITicketsState = {
   tickets: {
     xqws: {
-      // id: '',
       title: 'jkjkj',
       description: 'Description',
       tags: ['yellow', 'green', 'red', 'violet', 'lightBlue'],
       commentsIds: ['sdsd', 'sddff'],
+      type: 'todo',
     },
     adfv: {
-      // id: '',
-
       title: 'dfdfd',
       description: 'Description',
       tags: ['yellow', 'green'],
       commentsIds: [],
+      type: 'todo',
     },
     wefv: {
-      // id: '',
-
       title: 'dfdrerer',
       description: 'Description',
       tags: ['yellow', 'darkBlue'],
       commentsIds: [],
+      type: 'inProgress',
     },
   },
   todo: ['xqws', 'adfv'],
   done: [],
   inProgress: ['wefv'],
-  // ids: ['xqws', 'adfv', 'wevf'],
 }
 const ticketsReducer = createSlice({
   name: 'tickets',
   initialState,
   reducers: {
-    createTicket(state, { payload }: PayloadAction<ITicket>) {
+    createTicket(state, { payload }: PayloadAction<INewTicket>) {
       let id = uuid()
-      state.tickets[id] = payload
+      state.tickets[id] = { ...payload, commentsIds: [] }
       if (payload.type === 'inProgress') {
         state.inProgress.push(id)
       } else {
         state.todo.push(id)
       }
     },
-    editTicket(state, { payload }: PayloadAction<ITicket & { id: string }>) {
+    editTicket(state, { payload }: PayloadAction<INewTicket & { id: string }>) {
       let { id, ...ticket } = payload
 
       state.tickets[id] = { ...ticket, type: state.tickets[id].type }

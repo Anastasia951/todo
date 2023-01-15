@@ -7,9 +7,10 @@ import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getTicketById } from '../../../store/tickets/ticketsSelectors'
 import { useFormik } from 'formik'
-import { editTicket, ITicket } from '../../../store/tickets/ticketsReducer'
+import { editTicket } from '../../../store/tickets/ticketsReducer'
 import { useRedirect } from '../../../hooks/useRedirect'
 import * as Yup from 'yup'
+import { INewTicket } from '../../../models/TStore'
 const styles = Object.assign(modalStyles, defaultStyles)
 
 export const EditTicket = () => {
@@ -20,13 +21,12 @@ export const EditTicket = () => {
   const validationSchema = Yup.object().shape({
     title: Yup.string().required(),
   })
-  const formik = useFormik<ITicket>({
+  const formik = useFormik<INewTicket>({
     initialValues: {
-      id,
       title: ticket.title,
       description: ticket.description,
       tags: ticket.tags,
-      commentsIds: ticket.commentsIds,
+      type: ticket.type,
     },
     validationSchema,
     onSubmit: values => {

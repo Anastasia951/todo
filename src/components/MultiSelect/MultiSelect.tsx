@@ -18,9 +18,10 @@ const colors = [
 
 interface IMultiSelectProps {
   formik?: any
+  values?: string[]
 }
 
-export const MultiSelect = ({ formik }: IMultiSelectProps) => {
+export const MultiSelect = ({ formik, values = [] }: IMultiSelectProps) => {
   const [isOpened, setIsOpened] = useState(false)
   return (
     <div className={styles.multiSelect}>
@@ -36,25 +37,27 @@ export const MultiSelect = ({ formik }: IMultiSelectProps) => {
           <img src={dropdown} alt='dropdown' />
         </span>
       </Button>
-      {isOpened && (
-        <div className={styles.wrapper}>
-          <div className={styles.scroll}>
-            <ul className={styles.list}>
-              {colors.map(color => (
-                <li key={color} className={styles.item}>
-                  <Checkbox
-                    formik={formik}
-                    name='tags'
-                    value={color}
-                    contentOnLeft>
-                    <Tag color={color} />
-                  </Checkbox>
-                </li>
-              ))}
-            </ul>
-          </div>
+      <div
+        className={cn(styles.wrapper, {
+          [styles.visible]: isOpened,
+        })}>
+        <div className={styles.scroll}>
+          <ul className={styles.list}>
+            {colors.map(color => (
+              <li key={color} className={styles.item}>
+                <Checkbox
+                  onChange={formik.handleChange}
+                  name='tags'
+                  value={color}
+                  checked={values.includes(color)}
+                  contentOnLeft>
+                  <Tag color={color} />
+                </Checkbox>
+              </li>
+            ))}
+          </ul>
         </div>
-      )}
+      </div>
     </div>
   )
 }

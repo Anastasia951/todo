@@ -2,6 +2,7 @@ import { v4 as uuid } from 'uuid'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 export type TId = string
 export interface ITicket {
+  id?: TId
   title: string
   description: string
   tags: string[]
@@ -19,18 +20,23 @@ interface ITicketsState {
 const initialState: ITicketsState = {
   tickets: {
     xqws: {
+      // id: '',
       title: 'jkjkj',
       description: 'Description',
       tags: ['yellow', 'green', 'red', 'violet', 'lightBlue'],
       commentsIds: ['sdsd', 'sddff'],
     },
     adfv: {
+      // id: '',
+
       title: 'dfdfd',
       description: 'Description',
       tags: ['yellow', 'green'],
       commentsIds: [],
     },
     wefv: {
+      // id: '',
+
       title: 'dfdrerer',
       description: 'Description',
       tags: ['yellow', 'darkBlue'],
@@ -55,8 +61,13 @@ const ticketsReducer = createSlice({
         state.todo.push(id)
       }
     },
+    editTicket(state, { payload }: PayloadAction<ITicket & { id: string }>) {
+      let { id, ...ticket } = payload
+
+      state.tickets[id] = { ...ticket, type: state.tickets[id].type }
+    },
   },
 })
 
-export const { createTicket } = ticketsReducer.actions
+export const { createTicket, editTicket } = ticketsReducer.actions
 export default ticketsReducer.reducer

@@ -31,12 +31,12 @@ export const CreateTicket = () => {
     onSubmit: values => {
       dispatch(
         createTicket({
-          ...values,
+          id: '',
           commentsIds: [],
           type: state?.type,
+          ...values,
         })
       )
-      console.log(values)
       redirect()
     },
   })

@@ -3,6 +3,7 @@
   max-width: 168px;
 }
 .wrapper {
+  display: none;
   position: absolute;
   background: #d8d7d7;
   border-radius: 0px 0px 3px 3px;
@@ -41,4 +42,8 @@
   span img {
     transform: rotate(0);
   }
+}
+
+.visible {
+  display: block;
 }

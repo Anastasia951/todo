@@ -4,23 +4,24 @@ import styles from './Checkbox.module.scss'
 
 interface ICheckboxProps extends React.HTMLProps<HTMLInputElement> {
   children: React.ReactNode
-  formik?: any
   contentOnLeft?: boolean
 }
 
 export const Checkbox = ({
   children,
   contentOnLeft = false,
-  formik,
+  onChange,
   value,
+  checked = false,
   ...options
 }: ICheckboxProps) => {
   return (
     <label className={cn(styles.label)}>
       {contentOnLeft && children}
       <input
+        checked={checked}
         value={value}
-        onChange={formik?.handleChange}
+        onChange={onChange}
         className={cn(styles.input)}
         {...options}
         type='checkbox'

@@ -5,8 +5,6 @@ import styles from './Input.module.scss'
 interface IInputProps extends React.InputHTMLAttributes<HTMLElement> {
   multiline: boolean
   fullWidth: boolean
-  placeholder: string
-  value: string
 }
 
 export const Input = ({

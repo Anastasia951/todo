@@ -2,7 +2,7 @@ import React from 'react'
 import cn from 'classnames'
 import styles from './Button.module.scss'
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant: 'primary' | 'gray' | 'default'
+  variant: 'primary' | 'gray' | 'default' | 'dots'
 }
 
 export function Button({
@@ -11,6 +11,13 @@ export function Button({
   variant = 'default',
   ...props
 }: ButtonProps) {
+  if (variant === 'dots') {
+    return (
+      <button {...props} className={cn(className, styles.button)}>
+        <span className={styles[variant]}></span>
+      </button>
+    )
+  }
   return (
     <button
       {...props}

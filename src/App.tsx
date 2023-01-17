@@ -11,6 +11,7 @@ function App() {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    console.log('inside')
     const tickets = JSON.parse(localStorage.getItem('tickets') || '[]')
     dispatch(saveTickets(tickets))
   }, [])

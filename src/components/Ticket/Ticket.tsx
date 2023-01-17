@@ -15,14 +15,15 @@ interface ITicketProps {
 }
 
 export const Ticket = ({ ticketId }: ITicketProps) => {
-  const redirect = useRedirect(`full/${ticketId}`)
   const { title, description, tags, commentsIds } = useSelector(
     getTicketById(ticketId)
   )
   return (
     <Link to={`edit/${ticketId}`} className={cn(styles.ticket)}>
       <h5 className={cn(styles.title)}>{title}</h5>
-      <Button className={styles.link} onClick={redirect} variant='dots' />
+      <Link className={styles.link} to={`full/${ticketId}`}>
+        <Button variant='dots' />
+      </Link>
       <div className={cn(styles.tags)}>
         {tags.map(color => (
           <Tag color={color} key={color} />

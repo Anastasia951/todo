@@ -7,10 +7,13 @@ import { Input } from '../../components/Input/Input'
 import { Tag } from '../../components/Tag/Tag'
 import { Comment } from '../../components/Comment/Comment'
 import BackToTask from '../../assets/back_to_task.svg'
+import { Button } from '../../components/Button/Button'
 
 export const FullTicket = () => {
   const { id } = useParams()
   const ticket = useSelector(getTicketById(id || ''))
+  if (!ticket) return <></>
+
   return (
     <div className={styles.container}>
       <nav className={styles.nav}>
@@ -19,7 +22,10 @@ export const FullTicket = () => {
           Вернуться к задачам
         </Link>
       </nav>
-      <h4 className={styles.title}>{ticket.title}</h4>
+      <header className={styles.header}>
+        <h4 className={styles.title}>{ticket.title}</h4>
+        <Button variant='dots' />
+      </header>
       <div className={styles.ticket}>
         <Input readOnly value={ticket.title} />
         <Input readOnly value={ticket.description} multiline />

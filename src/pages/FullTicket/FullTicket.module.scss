@@ -40,3 +40,9 @@
     height: calc(24rem / 16);
   }
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  max-width: 470px;
+}

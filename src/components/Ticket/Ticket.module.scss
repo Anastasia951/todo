@@ -16,34 +16,14 @@
   color: #333333;
 }
 .link {
-  padding: 5px 7px;
-  width: 0;
-  justify-self: end;
+  padding: 0 7px;
+  justify-self: center;
+  // align-self: center;
   position: relative;
-}
-.openTicket {
-  display: inline-block;
-  width: 3px;
-  height: 3px;
-  background-color: #929292;
-  border-radius: 50%;
-  position: absolute;
-  left: 50%;
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background-color: #929292;
-    border-radius: 50%;
-  }
-  &::before {
-    left: 5px;
-  }
-  &::after {
-    right: 5px;
-  }
+  display: flex;
+  align-items: flex-start;
+  padding: 0;
+  // align-items: flex-start;
 }
 .tags {
   display: grid;

@@ -20,28 +20,32 @@ button {
   background: #e3e3e3;
   padding: calc(10rem / 16);
 }
-
 .dots {
-  display: inline-block;
-  width: 3px;
-  height: 3px;
-  background-color: #929292;
-  border-radius: 50%;
-  position: absolute;
-  left: 50%;
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
+  width: 0;
+  padding: 0;
+  position: relative;
+  & > * {
+    display: inline-block;
     width: 3px;
     height: 3px;
     background-color: #929292;
     border-radius: 50%;
-  }
-  &::before {
-    left: 5px;
-  }
-  &::after {
-    right: 5px;
+    position: absolute;
+    left: 50%;
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background-color: #929292;
+      border-radius: 50%;
+    }
+    &::before {
+      left: 5px;
+    }
+    &::after {
+      right: 5px;
+    }
   }
 }

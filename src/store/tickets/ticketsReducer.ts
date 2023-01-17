@@ -5,38 +5,15 @@ export type TId = string
 
 interface ITicketsState {
   tickets: Record<TId, ITicket>
-  // ids: TId[]
   todo: TId[]
   done: TId[]
   inProgress: TId[]
 }
 const initialState: ITicketsState = {
-  tickets: {
-    xqws: {
-      title: 'jkjkj',
-      description: 'Description',
-      tags: ['yellow', 'green', 'red', 'violet', 'lightBlue'],
-      commentsIds: ['sdsd', 'sddff'],
-      type: 'todo',
-    },
-    adfv: {
-      title: 'dfdfd',
-      description: 'Description',
-      tags: ['yellow', 'green'],
-      commentsIds: [],
-      type: 'todo',
-    },
-    wefv: {
-      title: 'dfdrerer',
-      description: 'Description',
-      tags: ['yellow', 'darkBlue'],
-      commentsIds: [],
-      type: 'inProgress',
-    },
-  },
-  todo: ['xqws', 'adfv'],
+  tickets: {},
+  todo: [],
   done: [],
-  inProgress: ['wefv'],
+  inProgress: [],
 }
 const ticketsReducer = createSlice({
   name: 'tickets',
@@ -56,8 +33,14 @@ const ticketsReducer = createSlice({
 
       state.tickets[id] = { ...ticket, type: state.tickets[id].type }
     },
+    saveTickets(state, { payload }: PayloadAction<any>) {
+      for (let key in payload) {
+        // @ts-ignore
+        state[key] = payload[key]
+      }
+    },
   },
 })
 
-export const { createTicket, editTicket } = ticketsReducer.actions
+export const { createTicket, editTicket, saveTickets } = ticketsReducer.actions
 export default ticketsReducer.reducer

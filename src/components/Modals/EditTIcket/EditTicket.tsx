@@ -59,11 +59,13 @@ export const EditTicket = () => {
           value={formik.values.description}
           multiline
         />
-        <div className={styles.tags}>
-          {formik.values.tags.map(color => (
-            <Tag key={color} color={color} onDelete={deleteTag} editable />
-          ))}
-        </div>
+        {Boolean(formik.values.tags.length) && (
+          <div className={styles.tags}>
+            {formik.values.tags.map(color => (
+              <Tag key={color} color={color} onDelete={deleteTag} editable />
+            ))}
+          </div>
+        )}
         <MultiSelect formik={formik} values={formik.values.tags} />
         <Button variant='primary' type='submit'>
           Сохранить

@@ -1,0 +1,24 @@
+.popup {
+  position: absolute;
+  right: 0;
+  background: #ffffff;
+  box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+  padding: calc(12rem / 16);
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+}
+
+.close {
+  position: absolute;
+  top: 9px;
+  right: 9px;
+  width: fit-content;
+}
+.elem {
+  padding-right: 14px;
+  &:not(:last-child) {
+    margin-bottom: calc(8rem / 16);
+  }
+}

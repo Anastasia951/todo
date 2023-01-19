@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './FullTicket.module.scss'
 import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
@@ -8,12 +8,36 @@ import { Tag } from '../../components/Tag/Tag'
 import { Comment } from '../../components/Comment/Comment'
 import BackToTask from '../../assets/back_to_task.svg'
 import { Button } from '../../components/Button/Button'
+import { Popup } from '../../components/Popup/Popup'
+import { useFormik } from 'formik'
+import { ITicket } from '../../models/TStore'
+
+export type formMode = 'delete' | 'editing' | 'default'
 
 export const FullTicket = () => {
-  const { id } = useParams()
-  const ticket = useSelector(getTicketById(id || ''))
-  if (!ticket) return <></>
+  const [isOpened, setIsOpened] = useState(false)
+  const [mode, setMode] = useState<formMode>('default')
+  const { id } = useParams() as { id: string }
+  const ticket = useSelector(getTicketById(id))
 
+  const formik = useFormik<ITicket>({
+    initialValues: {
+      title: ticket?.title || '',
+      description: ticket?.description || '',
+      tags: ticket?.tags || [],
+      type: ticket?.type || 'todo',
+      commentsIds: ticket?.commentsIds || [],
+    },
+    enableReinitialize: true,
+    onSubmit: values => {
+      console.log(values)
+    },
+  })
+
+  if (!ticket) return <></>
+  function togglePopup() {
+    setIsOpened(p => !p)
+  }
   return (
     <div className={styles.container}>
       <nav className={styles.nav}>
@@ -24,25 +48,37 @@ export const FullTicket = () => {
       </nav>
       <header className={styles.header}>
         <h4 className={styles.title}>{ticket.title}</h4>
-        <Button variant='dots' />
+        <Button onClick={togglePopup} variant='dots' />
+        {isOpened && <Popup setMode={setMode} onClose={togglePopup} />}
       </header>
-      <div className={styles.ticket}>
-        <Input readOnly value={ticket.title} />
-        <Input readOnly value={ticket.description} multiline />
+      <form className={styles.ticket}>
+        <Input
+          name='title'
+          onChange={formik.handleChange}
+          readOnly={mode === 'default'}
+          value={formik.values.title}
+        />
+        <Input
+          name='description'
+          onChange={formik.handleChange}
+          readOnly={mode === 'default'}
+          value={formik.values.description}
+          multiline
+        />
         <div className={styles.colors}>
-          {ticket.tags.map(color => (
-            <Tag color={color} key={color} />
+          {formik.values.tags.map(color => (
+            <Tag editable={mode === 'editing'} color={color} key={color} />
           ))}
         </div>
 
-        {ticket.commentsIds && (
+        {formik.values.commentsIds && (
           <div className={styles.comments}>
-            {ticket.commentsIds.map(id => (
+            {formik.values.commentsIds.map(id => (
               <Comment id={id} />
             ))}
           </div>
         )}
-      </div>
+      </form>
     </div>
   )
 }

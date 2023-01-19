@@ -16,7 +16,7 @@ export function Button({
       <button
         {...props}
         className={cn(className, styles.button, styles[variant])}>
-        <span></span>
+        <span className={styles.dot}></span>
       </button>
     )
   }

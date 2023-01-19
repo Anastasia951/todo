@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-// export type TFilter = 'all' | 'todo' | 'inProgress' | 'done'
-
 interface IFiltersState {
   comment: boolean
   description: boolean

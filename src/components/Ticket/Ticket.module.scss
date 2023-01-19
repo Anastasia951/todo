@@ -7,6 +7,7 @@
   border-radius: 6px;
   row-gap: calc(10rem / 16);
   column-gap: 0.5rem;
+  position: relative;
 }
 .title {
   font-style: normal;
@@ -16,14 +17,8 @@
   color: #333333;
 }
 .link {
-  padding: 0 7px;
-  justify-self: center;
-  // align-self: center;
-  position: relative;
   display: flex;
   align-items: flex-start;
-  padding: 0;
-  // align-items: flex-start;
 }
 .tags {
   display: grid;
@@ -36,4 +31,12 @@
   display: flex;
   align-items: center;
   gap: 6px;
+}
+.overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: inherit;
 }

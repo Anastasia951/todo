@@ -19,7 +19,8 @@ export const Ticket = ({ ticketId }: ITicketProps) => {
     getTicketById(ticketId)
   )
   return (
-    <Link to={`edit/${ticketId}`} className={cn(styles.ticket)}>
+    <div className={cn(styles.ticket)}>
+      <Link to={`edit/${ticketId}`} className={styles.overlay} />
       <h5 className={cn(styles.title)}>{title}</h5>
       <Link className={styles.link} to={`full/${ticketId}`}>
         <Button variant='dots' />
@@ -33,6 +34,6 @@ export const Ticket = ({ ticketId }: ITicketProps) => {
         {description && <img src={hasDescription} alt='has description' />}
         {Boolean(commentsIds) && <img src={hasComments} alt='has comments' />}
       </div>
-    </Link>
+    </div>
   )
 }

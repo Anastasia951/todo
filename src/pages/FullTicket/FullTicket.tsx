@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styles from './FullTicket.module.scss'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, Outlet, useParams } from 'react-router-dom'
 import { getTicketById } from '../../store/tickets/ticketsSelectors'
 import { Input } from '../../components/Input/Input'
@@ -12,10 +12,12 @@ import { Popup } from '../../components/Popup/Popup'
 import { useFormik } from 'formik'
 import { ITicket } from '../../models/TStore'
 import { useRedirect } from '../../hooks/useRedirect'
+import { editTicket } from '../../store/tickets/ticketsReducer'
 
 export type formMode = 'delete' | 'editing' | 'default'
 
 export const FullTicket = () => {
+  const dispatch = useDispatch()
   const [isOpened, setIsOpened] = useState(false)
   const [mode, setMode] = useState<formMode>('default')
   const { id } = useParams() as { id: string }
@@ -32,7 +34,8 @@ export const FullTicket = () => {
     },
     enableReinitialize: true,
     onSubmit: values => {
-      console.log(values)
+      dispatch(editTicket({ ...values, id }))
+      setMode('default')
     },
   })
   if (!ticket) return <></>
@@ -50,7 +53,9 @@ export const FullTicket = () => {
       <header className={styles.header}>
         <h4 className={styles.title}>{ticket.title}</h4>
         <Button onClick={togglePopup} variant='dots' />
-        {isOpened && <Popup setMode={setMode} onClose={togglePopup} />}
+        {isOpened && (
+          <Popup mode={mode} setMode={setMode} onClose={togglePopup} />
+        )}
       </header>
       <form className={styles.ticket} onSubmit={formik.handleSubmit}>
         <Input
@@ -80,17 +85,20 @@ export const FullTicket = () => {
           </div>
         )}
 
-        <Button
-          type='button'
-          onClick={redirect}
-          variant='default'
-          className={styles.addComment}>
-          Добавить комментарий
-        </Button>
-
-        <Button variant='primary' type='submit'>
-          Сохранить
-        </Button>
+        {mode === 'editing' && (
+          <>
+            <Button
+              type='button'
+              onClick={redirect}
+              variant='default'
+              className={styles.addComment}>
+              Добавить комментарий
+            </Button>
+            <Button variant='primary' type='submit'>
+              Сохранить
+            </Button>
+          </>
+        )}
       </form>
 
       <Outlet />

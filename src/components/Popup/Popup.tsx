@@ -5,11 +5,12 @@ import { Button } from '../Button/Button'
 import { formMode } from '../../pages/FullTicket/FullTicket'
 
 interface IPopupProps {
+  mode: formMode
   onClose: () => void
   setMode: (param: formMode) => void
 }
 
-export const Popup = ({ onClose, setMode }: IPopupProps) => {
+export const Popup = ({ mode, onClose, setMode }: IPopupProps) => {
   function closePopup(mode: formMode) {
     setMode(mode)
     onClose()
@@ -25,12 +26,14 @@ export const Popup = ({ onClose, setMode }: IPopupProps) => {
         className={styles.elem}>
         Удалить
       </Button>
-      <Button
-        variant='default'
-        onClick={() => closePopup('editing')}
-        className={styles.elem}>
-        Редактировать
-      </Button>
+      {mode !== 'editing' && (
+        <Button
+          variant='default'
+          onClick={() => closePopup('editing')}
+          className={styles.elem}>
+          Редактировать
+        </Button>
+      )}
     </div>
   )
 }

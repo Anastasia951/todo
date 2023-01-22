@@ -5,6 +5,7 @@ import { ModalWrapper } from './components/Modals/ModalWrapper'
 import { FullTicket } from './pages/FullTicket/FullTicket'
 import { Home } from './pages/Home/Home'
 import { NotFound } from './pages/NotFound/NotFound'
+import { ICommentsState, saveComments } from './store/comments/commentsReducer'
 import { saveTickets } from './store/tickets/ticketsReducer'
 
 function App() {
@@ -12,7 +13,11 @@ function App() {
 
   useEffect(() => {
     const tickets = JSON.parse(localStorage.getItem('tickets') || '[]')
+    const comments = JSON.parse(
+      localStorage.getItem('comments') || '[]'
+    ) as ICommentsState
     dispatch(saveTickets(tickets))
+    dispatch(saveComments(comments))
   }, [])
 
   return (

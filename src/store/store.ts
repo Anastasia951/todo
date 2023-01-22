@@ -10,6 +10,10 @@ const ticketsMiddleware = (store: any) => (next: any) => (action: any) => {
     localStorage.setItem('tickets', JSON.stringify(tickets))
   }
 
+  if (action.type.match(/comment/gi)) {
+    let comments = store.getState().comments
+    localStorage.setItem('comments', JSON.stringify(comments))
+  }
   return result
 }
 

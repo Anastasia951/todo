@@ -19,8 +19,7 @@ export const CreateTicket = () => {
   const { state } = useLocation()
 
   const validationSchema = Yup.object().shape({
-    title: Yup.string().required(),
-    description: Yup.string(),
+    title: Yup.string().required().min(3),
   })
   const formik = useFormik<ITicket>({
     initialValues: {
@@ -30,6 +29,7 @@ export const CreateTicket = () => {
       type: state.type,
       commentsIds: [],
     },
+    validateOnMount: true,
     validationSchema,
     onSubmit: values => {
       dispatch(
@@ -41,7 +41,6 @@ export const CreateTicket = () => {
       redirect()
     },
   })
-
   return (
     <div className={styles.content}>
       <h4 className={styles.title}>Создать тикет</h4>
@@ -52,9 +51,6 @@ export const CreateTicket = () => {
           onChange={formik.handleChange}
           fullWidth
           placeholder='Название'
-          className={cn({
-            [styles.required]: formik.touched.title && formik.errors.title,
-          })}
         />
         <Input
           name='description'
@@ -65,7 +61,7 @@ export const CreateTicket = () => {
           multiline
         />
         <MultiSelect formik={formik} values={formik.values.tags} />
-        <Button variant='primary' type='submit'>
+        <Button disabled={!formik.isValid} variant='primary' type='submit'>
           Сохранить
         </Button>
       </form>

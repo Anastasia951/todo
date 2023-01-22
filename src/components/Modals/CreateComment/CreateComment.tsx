@@ -1,3 +1,4 @@
+import * as Yup from 'yup'
 import { v4 as uuid } from 'uuid'
 import { useFormik } from 'formik'
 import React from 'react'
@@ -13,12 +14,19 @@ export const CreateComment = () => {
   const dispatch = useDispatch()
   const { id } = useParams() as { id: string }
   const redirect = useRedirect(`/full/${id}`)
+
+  const validationSchema = Yup.object().shape({
+    author: Yup.string().required().min(2),
+    text: Yup.string().required().min(2),
+  })
   const formik = useFormik<IComment>({
     initialValues: {
       author: '',
       text: '',
       ticketId: id,
     },
+    validateOnMount: true,
+    validationSchema,
     onSubmit: values => {
       let commentId = uuid()
       dispatch(addComment({ ...values, commentId }))
@@ -43,7 +51,11 @@ export const CreateComment = () => {
           placeholder='Комментарий'
           multiline
         />
-        <Button className={styles.submit} type='submit' variant='primary'>
+        <Button
+          disabled={!formik.isValid}
+          className={styles.submit}
+          type='submit'
+          variant='primary'>
           Сохранить
         </Button>
       </form>

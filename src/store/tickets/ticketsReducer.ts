@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { INewTicket, ITicket } from '../../models/TStore'
+import { ITicket } from '../../models/TStore'
 export type TId = string
 
 interface ITicketsState {
@@ -28,7 +28,7 @@ const ticketsReducer = createSlice({
         state.todo.push(id)
       }
     },
-    editTicket(state, { payload }: PayloadAction<INewTicket & { id: string }>) {
+    editTicket(state, { payload }: PayloadAction<ITicket & { id: string }>) {
       let { id, ...ticket } = payload
 
       state.tickets[id] = { ...ticket, type: state.tickets[id].type }
@@ -38,7 +38,6 @@ const ticketsReducer = createSlice({
       { payload }: PayloadAction<{ ticketId: string; commentId: string }>
     ) {
       const { ticketId, commentId } = payload
-      console.log(ticketId, commentId)
       state.tickets[ticketId].commentsIds?.push(commentId)
     },
     saveTickets(state, { payload }: PayloadAction<any>) {

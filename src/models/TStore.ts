@@ -19,5 +19,3 @@ export interface ITicket {
   commentsIds?: string[]
   type: TTicketType
 }
-
-export type INewTicket = Omit<ITicket, 'commentsIds'>

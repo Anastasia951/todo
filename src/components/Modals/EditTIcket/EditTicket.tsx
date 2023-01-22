@@ -1,5 +1,6 @@
 import defaultStyles from '../Modal.module.scss'
 import modalStyles from './EditTicket.module.scss'
+
 import { Input } from '../../Input/Input'
 import { Button } from '../../Button/Button'
 import { MultiSelect } from '../../MultiSelect/MultiSelect'
@@ -10,7 +11,7 @@ import { useFormik } from 'formik'
 import { editTicket } from '../../../store/tickets/ticketsReducer'
 import { useRedirect } from '../../../hooks/useRedirect'
 import * as Yup from 'yup'
-import { INewTicket, TColor } from '../../../models/TStore'
+import { ITicket, TColor } from '../../../models/TStore'
 import { Tag } from '../../Tag/Tag'
 const styles = Object.assign(modalStyles, defaultStyles)
 
@@ -22,13 +23,15 @@ export const EditTicket = () => {
   const validationSchema = Yup.object().shape({
     title: Yup.string().required(),
   })
-  const formik = useFormik<INewTicket>({
+  const formik = useFormik<ITicket>({
     initialValues: {
       title: ticket.title,
       description: ticket.description,
       tags: ticket.tags,
       type: ticket.type,
+      commentsIds: ticket.commentsIds,
     },
+    validateOnMount: true,
     validationSchema,
     onSubmit: values => {
       dispatch(editTicket({ ...values, id }))
@@ -67,7 +70,7 @@ export const EditTicket = () => {
           </div>
         )}
         <MultiSelect formik={formik} values={formik.values.tags} />
-        <Button variant='primary' type='submit'>
+        <Button disabled={!formik.isValid} variant='primary' type='submit'>
           Сохранить
         </Button>
       </form>

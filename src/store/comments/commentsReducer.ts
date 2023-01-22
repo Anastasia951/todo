@@ -12,18 +12,7 @@ export interface ICommentsState {
 }
 
 const initialState: ICommentsState = {
-  comments: {
-    // sdsd: {
-    //   text: 'ewrwerwer',
-    //   author: 'me',
-    //   ticketId: 'xqws',
-    // },
-    // sddff: {
-    //   text: 'asdasd',
-    //   author: 'me',
-    //   ticketId: 'xqws',
-    // },
-  },
+  comments: {},
 }
 
 const commentsReducer = createSlice({
@@ -41,7 +30,6 @@ const commentsReducer = createSlice({
         //@ts-ignore
         state[key] = payload[key]
       }
-      // state = payload
     },
   },
 })

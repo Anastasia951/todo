@@ -10,6 +10,7 @@ interface IComentProps {
 
 export const Comment = ({ id }: IComentProps) => {
   const comment = useSelector(getCommentById(id))
+  if (!comment) return <></>
   return (
     <div className={styles.comment}>
       <h4 className={styles.author}>{comment.author}</h4>

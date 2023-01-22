@@ -5,6 +5,8 @@ import styles from './ModalWrapper.module.scss'
 import close from '../../assets/close.svg'
 import { Link } from 'react-router-dom'
 import { EditTicket } from './EditTIcket/EditTicket'
+import { CreateComment } from './CreateComment/CreateComment'
+
 interface ModalWrapper {
   type: string
 }
@@ -19,10 +21,15 @@ export const ModalWrapper = ({ type }: ModalWrapper) => {
       Element = EditTicket
       break
     }
+    case 'commentCreate': {
+      Element = CreateComment
+      break
+    }
     default: {
       Element = CreateTicket
     }
   }
+
   const [isDOMReady, setIsDOMReady] = useState(false)
   useEffect(() => {
     setIsDOMReady(true)

@@ -22,7 +22,12 @@ function App() {
           <Route path='create' element={<ModalWrapper type='create' />} />
           <Route path='edit/:id' element={<ModalWrapper type='edit' />} />
         </Route>
-        <Route path='/full/:id' element={<FullTicket />}></Route>
+        <Route path='/full/:id' element={<FullTicket />}>
+          <Route
+            path='comment/create'
+            element={<ModalWrapper type='commentCreate' />}
+          />
+        </Route>
         <Route path='*' element={<NotFound />}></Route>
       </Routes>
 

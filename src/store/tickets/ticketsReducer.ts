@@ -19,7 +19,7 @@ const ticketsReducer = createSlice({
   name: 'tickets',
   initialState,
   reducers: {
-    createTicket(state, { payload }: PayloadAction<INewTicket>) {
+    createTicket(state, { payload }: PayloadAction<ITicket>) {
       let id = uuid()
       state.tickets[id] = { ...payload, commentsIds: [] }
       if (payload.type === 'inProgress') {
@@ -33,6 +33,14 @@ const ticketsReducer = createSlice({
 
       state.tickets[id] = { ...ticket, type: state.tickets[id].type }
     },
+    pushCommentId(
+      state,
+      { payload }: PayloadAction<{ ticketId: string; commentId: string }>
+    ) {
+      const { ticketId, commentId } = payload
+      console.log(ticketId, commentId)
+      state.tickets[ticketId].commentsIds?.push(commentId)
+    },
     saveTickets(state, { payload }: PayloadAction<any>) {
       for (let key in payload) {
         // @ts-ignore
@@ -42,5 +50,6 @@ const ticketsReducer = createSlice({
   },
 })
 
-export const { createTicket, editTicket, saveTickets } = ticketsReducer.actions
+export const { createTicket, editTicket, saveTickets, pushCommentId } =
+  ticketsReducer.actions
 export default ticketsReducer.reducer

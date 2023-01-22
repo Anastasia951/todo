@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux'
 import { useRedirect } from '../../../hooks/useRedirect'
 import { useFormik } from 'formik'
 import { useLocation } from 'react-router-dom'
+import { ITicket } from '../../../models/TStore'
 const styles = Object.assign(modalStyles, defaultStyles)
 
 export const CreateTicket = () => {
@@ -21,18 +22,20 @@ export const CreateTicket = () => {
     title: Yup.string().required(),
     description: Yup.string(),
   })
-  const formik = useFormik({
+  const formik = useFormik<ITicket>({
     initialValues: {
       title: '',
       description: '',
       tags: [],
+      type: state.type,
+      commentsIds: [],
     },
     validationSchema,
     onSubmit: values => {
       dispatch(
         createTicket({
           ...values,
-          type: state?.type,
+          type: state.type,
         })
       )
       redirect()

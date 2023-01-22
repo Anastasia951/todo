@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from './FullTicket.module.scss'
 import { useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import { Link, Outlet, useParams } from 'react-router-dom'
 import { getTicketById } from '../../store/tickets/ticketsSelectors'
 import { Input } from '../../components/Input/Input'
 import { Tag } from '../../components/Tag/Tag'
@@ -11,6 +11,7 @@ import { Button } from '../../components/Button/Button'
 import { Popup } from '../../components/Popup/Popup'
 import { useFormik } from 'formik'
 import { ITicket } from '../../models/TStore'
+import { useRedirect } from '../../hooks/useRedirect'
 
 export type formMode = 'delete' | 'editing' | 'default'
 
@@ -19,6 +20,7 @@ export const FullTicket = () => {
   const [mode, setMode] = useState<formMode>('default')
   const { id } = useParams() as { id: string }
   const ticket = useSelector(getTicketById(id))
+  const redirect = useRedirect(`/full/${id}/comment/create`)
 
   const formik = useFormik<ITicket>({
     initialValues: {
@@ -33,7 +35,6 @@ export const FullTicket = () => {
       console.log(values)
     },
   })
-
   if (!ticket) return <></>
   function togglePopup() {
     setIsOpened(p => !p)
@@ -51,7 +52,7 @@ export const FullTicket = () => {
         <Button onClick={togglePopup} variant='dots' />
         {isOpened && <Popup setMode={setMode} onClose={togglePopup} />}
       </header>
-      <form className={styles.ticket}>
+      <form className={styles.ticket} onSubmit={formik.handleSubmit}>
         <Input
           name='title'
           onChange={formik.handleChange}
@@ -67,18 +68,32 @@ export const FullTicket = () => {
         />
         <div className={styles.colors}>
           {formik.values.tags.map(color => (
-            <Tag editable={mode === 'editing'} color={color} key={color} />
+            <Tag color={color} key={color} />
           ))}
         </div>
 
         {formik.values.commentsIds && (
           <div className={styles.comments}>
             {formik.values.commentsIds.map(id => (
-              <Comment id={id} />
+              <Comment id={id} key={id} />
             ))}
           </div>
         )}
+
+        <Button
+          type='button'
+          onClick={redirect}
+          variant='default'
+          className={styles.addComment}>
+          Добавить комментарий
+        </Button>
+
+        <Button variant='primary' type='submit'>
+          Сохранить
+        </Button>
       </form>
+
+      <Outlet />
     </div>
   )
 }

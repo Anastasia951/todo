@@ -1,0 +1,21 @@
+.title {
+  font-size: 1rem;
+  line-height: 19 / 16;
+  font-weight: 500;
+  margin-bottom: calc(14rem / 16);
+}
+
+.form {
+  border: 1px solid #cacaca;
+  border-radius: 7px;
+  padding: calc(14rem / 16);
+  & > * {
+    width: 100%;
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+.submit {
+  margin-top: calc(14rem / 16);
+}

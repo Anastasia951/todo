@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { TId } from '../tickets/ticketsReducer'
 
-interface IComment {
+export interface IComment {
   text: string
   author: string
   ticketId: TId
@@ -30,11 +30,14 @@ const commentsReducer = createSlice({
   name: 'comments',
   initialState,
   reducers: {
-    addComment(state, { payload }: PayloadAction<IComment>) {
-      let commentId = uuid()
-      state.comments[commentId] = payload
+    addComment(
+      state,
+      { payload }: PayloadAction<IComment & { commentId: string }>
+    ) {
+      state.comments[payload.commentId] = payload
     },
   },
 })
 
 export default commentsReducer.reducer
+export const { addComment } = commentsReducer.actions

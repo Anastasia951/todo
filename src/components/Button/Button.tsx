@@ -14,6 +14,7 @@ export function Button({
   if (variant === 'dots') {
     return (
       <button
+        name='dots'
         {...props}
         className={cn(className, styles.button, styles[variant])}>
         <span className={styles.dot}></span>

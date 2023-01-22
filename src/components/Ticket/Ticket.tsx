@@ -20,9 +20,16 @@ export const Ticket = ({ ticketId }: ITicketProps) => {
   )
   return (
     <div className={cn(styles.ticket)}>
-      <Link to={`edit/${ticketId}`} className={styles.overlay} />
+      <Link
+        aria-label='Edit ticket'
+        to={`edit/${ticketId}`}
+        className={styles.overlay}
+      />
       <h5 className={cn(styles.title)}>{title}</h5>
-      <Link className={styles.link} to={`full/${ticketId}`}>
+      <Link
+        className={styles.link}
+        aria-label='Full ticket page'
+        to={`full/${ticketId}`}>
         <Button variant='dots' />
       </Link>
       <div className={cn(styles.tags)}>

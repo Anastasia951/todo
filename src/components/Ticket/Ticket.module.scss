@@ -19,6 +19,8 @@
 .link {
   display: flex;
   align-items: flex-start;
+  align-self: flex-start;
+  justify-self: flex-end;
 }
 .tags {
   display: grid;

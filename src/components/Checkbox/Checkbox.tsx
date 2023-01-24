@@ -18,14 +18,7 @@ export const Checkbox = ({
   return (
     <label className={cn(styles.label)}>
       {contentOnLeft && children}
-      <input
-        checked={checked}
-        value={value}
-        onChange={onChange}
-        className={cn(styles.input)}
-        {...options}
-        type='checkbox'
-      />
+      <input className={cn(styles.input)} type='checkbox' {...options} />
       {!contentOnLeft && children}
     </label>
   )

@@ -20,7 +20,7 @@ export const Filters = () => {
     let keys = Object.keys(filters) as TFilter[]
     let path = keys.map(el => `${el}=${filters[el]}`).join('&')
 
-    navigate(`?filters=${path}`)
+    navigate(`/?filters=${path}`)
   }, [filters])
 
   return (

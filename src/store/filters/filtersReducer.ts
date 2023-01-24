@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-interface IFiltersState {
+export interface IFiltersState {
   comment: boolean
   description: boolean
   tag: boolean

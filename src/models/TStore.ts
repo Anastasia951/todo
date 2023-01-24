@@ -16,6 +16,6 @@ export interface ITicket {
   title: string
   description?: string
   tags: TColor[]
-  commentsIds?: string[]
+  commentsIds: string[]
   type: TTicketType
 }

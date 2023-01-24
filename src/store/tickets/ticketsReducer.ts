@@ -21,7 +21,7 @@ const ticketsReducer = createSlice({
   reducers: {
     createTicket(state, { payload }: PayloadAction<ITicket>) {
       let id = uuid()
-      state.tickets[id] = { ...payload, commentsIds: [] }
+      state.tickets[id] = payload
       if (payload.type === 'inProgress') {
         state.inProgress.push(id)
       } else {

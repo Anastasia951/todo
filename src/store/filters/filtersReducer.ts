@@ -20,9 +20,15 @@ const filtersReducer = createSlice({
     changeField(state, { payload }: PayloadAction<TFilter>) {
       state[payload] = !state[payload]
     },
+    saveFilters(state, { payload }: PayloadAction<IFiltersState>) {
+      for (let key in payload) {
+        //@ts-ignore
+        state[key] = payload[key]
+      }
+    },
   },
 })
 
 export default filtersReducer.reducer
 
-export const { changeField } = filtersReducer.actions
+export const { changeField, saveFilters } = filtersReducer.actions

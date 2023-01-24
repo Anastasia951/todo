@@ -9,15 +9,19 @@ import {
 import { Ticket } from '../Ticket/Ticket'
 import { Button } from '../Button/Button'
 import { useRedirect } from '../../hooks/useRedirect'
-import { getFilters } from '../../store/filters/filtersSelector'
+import { IFiltersState } from '../../store/filters/filtersReducer'
 
 interface IColumnProps {
   title: string
   type?: 'todo' | 'inProgress' | 'done'
+  filters: IFiltersState
 }
 
-export const Column = ({ title = '', type = 'todo' }: IColumnProps) => {
-  const filters = useSelector(getFilters())
+export const Column = ({
+  title = '',
+  type = 'todo',
+  filters,
+}: IColumnProps) => {
   let ticketsIds = useSelector(getTicketsByType(type))
   ticketsIds = useSelector(getFilteredTickets(ticketsIds, filters))
   const redirect = useRedirect('create', { type })

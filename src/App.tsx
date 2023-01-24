@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { ModalWrapper } from './components/Modals/ModalWrapper'
 import { FullTicket } from './pages/FullTicket/FullTicket'
 import { Home } from './pages/Home/Home'
@@ -10,7 +10,6 @@ import { saveTickets } from './store/tickets/ticketsReducer'
 
 function App() {
   const dispatch = useDispatch()
-
   useEffect(() => {
     const tickets = JSON.parse(localStorage.getItem('tickets') || '[]')
     const comments = JSON.parse(

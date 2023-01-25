@@ -3,10 +3,11 @@ import { useEffect, useState } from 'react'
 import { CreateTicket } from './CreateTicket/CreateTicket'
 import styles from './ModalWrapper.module.scss'
 import close from '../../assets/close.svg'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { EditTicket } from './EditTIcket/EditTicket'
 import { CreateComment } from './CreateComment/CreateComment'
 import { Button } from '../Button/Button'
+import cn from 'classnames'
 
 interface ModalWrapper {
   type: string
@@ -40,8 +41,9 @@ export const ModalWrapper = ({ type }: ModalWrapper) => {
   return (
     container &&
     ReactDOM.createPortal(
-      <div className={styles.container}>
-        <div className={styles.content}>
+      <>
+        <div className={cn(styles.overlay, 'modal-opened')} />
+        <div className={styles.modalContent}>
           <Element />
           <Button
             variant='default'
@@ -52,7 +54,7 @@ export const ModalWrapper = ({ type }: ModalWrapper) => {
             <img src={close} alt='close modal' />
           </Button>
         </div>
-      </div>,
+      </>,
       container
     )
   )

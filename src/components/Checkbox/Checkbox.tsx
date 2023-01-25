@@ -10,8 +10,6 @@ interface ICheckboxProps extends React.HTMLProps<HTMLInputElement> {
 export const Checkbox = ({
   children,
   contentOnLeft = false,
-  onChange,
-  value,
   checked = false,
   ...options
 }: ICheckboxProps) => {

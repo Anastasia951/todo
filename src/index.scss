@@ -33,3 +33,17 @@ button {
   background: rgba(182, 182, 182, 0.99);
   border-radius: 3px;
 }
+body:has(.modal-opened) *:not(.modalContent) {
+  overflow: hidden;
+}
+.modal-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  right: 0;
+  bottom: 0;
+  &:has(> *) {
+    display: block;
+  }
+}

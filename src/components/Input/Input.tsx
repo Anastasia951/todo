@@ -27,6 +27,7 @@ export const Input = ({
   return (
     <input
       {...props}
+      type='text'
       className={cn([className], styles.input, styles.oneline, {
         [styles.fullWidth]: fullWidth,
       })}

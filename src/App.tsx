@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { ModalWrapper } from './components/Modals/ModalWrapper'
 import { FullTicket } from './pages/FullTicket/FullTicket'
 import { Home } from './pages/Home/Home'
@@ -26,7 +26,13 @@ function App() {
           <Route path='create' element={<ModalWrapper type='create' />} />
           <Route path='edit/:id' element={<ModalWrapper type='edit' />} />
         </Route>
-        <Route path='/full/:id' element={<FullTicket />}>
+        <Route
+          path='/full/:id'
+          element={
+            // <Suspense>
+            <FullTicket />
+            // </Suspense>
+          }>
           <Route
             path='comment/create'
             element={<ModalWrapper type='commentCreate' />}

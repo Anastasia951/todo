@@ -12,7 +12,6 @@ import { saveFilters } from '../../store/filters/filtersReducer'
 export const Home = () => {
   const dispatch = useDispatch()
   const { search } = useLocation()
-  console.log('render')
   useEffect(() => {
     const url = new URLSearchParams(search)
     const comment = url.get('comment') === 'true'

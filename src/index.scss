@@ -36,6 +36,9 @@ button {
 body:has(.modal-opened) *:not(.modal-container *) {
   overflow: hidden;
 }
+input {
+  cursor: text;
+}
 .modal-container {
   position: absolute;
   top: 0;

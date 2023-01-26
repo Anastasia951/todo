@@ -5,6 +5,10 @@ $yellow: #ffe445;
   font: inherit;
   font-size: (14rem / 16);
   background: none;
+  transition: filter 0.2s ease;
+  &:not(:disabled):hover {
+    filter: brightness(0.9);
+  }
 }
 .primary {
   background: $yellow;

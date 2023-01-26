@@ -33,7 +33,7 @@ button {
   background: rgba(182, 182, 182, 0.99);
   border-radius: 3px;
 }
-body:has(.modal-opened) *:not(.modalContent) {
+body:has(.modal-opened) *:not(.modal-container *) {
   overflow: hidden;
 }
 .modal-container {

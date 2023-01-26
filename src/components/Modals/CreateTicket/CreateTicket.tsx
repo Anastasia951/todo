@@ -17,6 +17,7 @@ export const CreateTicket = () => {
   const redirect = useRedirect('/')
   const dispatch = useDispatch()
   const { state } = useLocation()
+  console.log('render form')
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required().min(3),

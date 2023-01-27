@@ -13,6 +13,7 @@ import { useRedirect } from '../../../hooks/useRedirect'
 import * as Yup from 'yup'
 import { ITicket, TColor } from '../../../models/TStore'
 import { Tag } from '../../Tag/Tag'
+
 const styles = Object.assign(modalStyles, defaultStyles)
 
 export const EditTicket = () => {
@@ -21,7 +22,8 @@ export const EditTicket = () => {
   const ticket = useSelector(getTicketById(id))
   const redirect = useRedirect('/')
   const validationSchema = Yup.object().shape({
-    title: Yup.string().required(),
+    title: Yup.string().required().min(3).max(50),
+    description: Yup.string().max(100),
   })
   const formik = useFormik<ITicket>({
     initialValues: {

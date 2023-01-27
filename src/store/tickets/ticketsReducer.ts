@@ -56,7 +56,6 @@ const ticketsReducer = createSlice({
     },
 
     dragTicket(state, { payload }: PayloadAction<IDragTickets>) {
-      //если ниже половины тикета, то indexBefore++
       const { draggableId, droppableId, endColumn, startColumn, isBottomHalf } =
         payload
       let curIndex = state[startColumn].findIndex(el => el === draggableId)

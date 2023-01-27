@@ -16,8 +16,8 @@ export const CreateComment = () => {
   const redirect = useRedirect(`/full/${id}`)
 
   const validationSchema = Yup.object().shape({
-    author: Yup.string().required().min(2),
-    text: Yup.string().required().min(2),
+    author: Yup.string().required().min(2).max(50),
+    text: Yup.string().required().min(2).max(100),
   })
   const formik = useFormik<IComment>({
     initialValues: {

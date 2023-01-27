@@ -19,7 +19,8 @@ export const CreateTicket = () => {
   const { state } = useLocation()
 
   const validationSchema = Yup.object().shape({
-    title: Yup.string().required().min(3),
+    title: Yup.string().required().min(3).max(50),
+    description: Yup.string().max(100),
   })
   const formik = useFormik<ITicket>({
     initialValues: {

@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import cn from 'classnames'
 import styles from './Ticket.module.scss'
-import { dragTicket, TId } from '../../store/tickets/ticketsReducer'
-import { useDispatch, useSelector } from 'react-redux'
+import { TId } from '../../store/tickets/ticketsReducer'
+import { useSelector } from 'react-redux'
 import { getTicketById } from '../../store/tickets/ticketsSelectors'
 import { Link } from 'react-router-dom'
 import { Tag } from '../Tag/Tag'
@@ -19,8 +19,11 @@ export const Ticket = ({ ticketId }: ITicketProps) => {
     getTicketById(ticketId)
   )
   function dragStartHandler(e: React.DragEvent<HTMLDivElement>) {
+    e.dataTransfer.dropEffect = 'copy'
     e.dataTransfer.setData('draggableId', ticketId)
     e.dataTransfer.setData('draggableColumn', type)
+
+    return false
   }
   return (
     <div
@@ -29,9 +32,10 @@ export const Ticket = ({ ticketId }: ITicketProps) => {
       id={ticketId}
       draggable>
       <Link
+        draggable='false'
         aria-label='Edit ticket'
         to={`edit/${ticketId}`}
-        className={styles.overlay}
+        className={cn(styles.overlay)}
       />
       <h5 className={cn(styles.title)}>{title}</h5>
       <Link

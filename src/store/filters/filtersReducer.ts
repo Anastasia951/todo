@@ -23,7 +23,7 @@ const filtersReducer = createSlice({
     saveFilters(state, { payload }: PayloadAction<IFiltersState>) {
       for (let key in payload) {
         //@ts-ignore
-        state[key] = payload[key]
+        state[key] = !!payload[key]
       }
     },
   },

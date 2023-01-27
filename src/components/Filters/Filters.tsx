@@ -18,9 +18,13 @@ export const Filters = () => {
 
   useEffect(() => {
     let keys = Object.keys(filters) as TFilter[]
-    let path = keys.map(el => `${el}=${filters[el]}`).join('&')
 
-    navigate(`/?filters=${path}`)
+    let path = keys
+      .filter(key => !!filters[key])
+      .map(el => `${el}`)
+      .join('&')
+
+    if (path) navigate(`/?filters=${path}`)
   }, [filters])
 
   return (

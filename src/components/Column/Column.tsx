@@ -37,13 +37,28 @@ export const Column = ({
   const onDropHandler = (e: React.DragEvent<HTMLDivElement>) => {
     const target = e.target as HTMLElement
     const nearest = target.closest(`[id]`)
-    const droppableId = nearest?.id
-    const draggableId = e.dataTransfer.getData('draggableId')
-    const startColumn = e.dataTransfer.getData('draggableColumn') as TTicketType
-    const endColumn = type
 
-    if (droppableId && draggableId && startColumn && endColumn) {
-      dispatch(dragTicket({ draggableId, droppableId, startColumn, endColumn }))
+    if (nearest) {
+      let { top, bottom } = nearest?.getBoundingClientRect()
+      let isBottomHalf = e.pageY > (bottom + top) / 2
+      const droppableId = nearest?.id
+      const draggableId = e.dataTransfer.getData('draggableId')
+      const startColumn = e.dataTransfer.getData(
+        'draggableColumn'
+      ) as TTicketType
+      const endColumn = type
+
+      if (droppableId && draggableId && startColumn && endColumn) {
+        dispatch(
+          dragTicket({
+            draggableId,
+            droppableId,
+            startColumn,
+            endColumn,
+            isBottomHalf,
+          })
+        )
+      }
     }
   }
 

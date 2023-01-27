@@ -21,6 +21,7 @@ interface IDragTickets {
   endColumn: TTicketType
   droppableId: string
   draggableId: string
+  isBottomHalf: boolean
 }
 const ticketsReducer = createSlice({
   name: 'tickets',
@@ -55,12 +56,15 @@ const ticketsReducer = createSlice({
     },
 
     dragTicket(state, { payload }: PayloadAction<IDragTickets>) {
-      const { draggableId, droppableId, endColumn, startColumn } = payload
-      let indexBefore = state[endColumn].findIndex(el => el === droppableId)
-      state[endColumn].splice(indexBefore, 0, draggableId)
+      //если ниже половины тикета, то indexBefore++
+      const { draggableId, droppableId, endColumn, startColumn, isBottomHalf } =
+        payload
       let curIndex = state[startColumn].findIndex(el => el === draggableId)
       state[startColumn].splice(curIndex, 1)
       state.tickets[draggableId].type = endColumn
+      let indexBefore = state[endColumn].findIndex(el => el === droppableId)
+      if (isBottomHalf) indexBefore++
+      state[endColumn].splice(indexBefore, 0, draggableId)
     },
   },
 })

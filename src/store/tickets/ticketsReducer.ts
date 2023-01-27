@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ITicket } from '../../models/TStore'
+import { ITicket, TTicketType } from '../../models/TStore'
 export type TId = string
 
 interface ITicketsState {
@@ -14,6 +14,13 @@ const initialState: ITicketsState = {
   todo: [],
   done: [],
   inProgress: [],
+}
+
+interface IDragTickets {
+  startColumn: TTicketType
+  endColumn: TTicketType
+  droppableId: string
+  draggableId: string
 }
 const ticketsReducer = createSlice({
   name: 'tickets',
@@ -46,9 +53,23 @@ const ticketsReducer = createSlice({
         state[key] = payload[key]
       }
     },
+
+    dragTicket(state, { payload }: PayloadAction<IDragTickets>) {
+      const { draggableId, droppableId, endColumn, startColumn } = payload
+      let indexBefore = state[endColumn].findIndex(el => el === droppableId)
+      state[endColumn].splice(indexBefore, 0, draggableId)
+      let curIndex = state[startColumn].findIndex(el => el === draggableId)
+      state[startColumn].splice(curIndex, 1)
+      state.tickets[draggableId].type = endColumn
+    },
   },
 })
 
-export const { createTicket, editTicket, saveTickets, pushCommentId } =
-  ticketsReducer.actions
+export const {
+  createTicket,
+  editTicket,
+  saveTickets,
+  pushCommentId,
+  dragTicket,
+} = ticketsReducer.actions
 export default ticketsReducer.reducer

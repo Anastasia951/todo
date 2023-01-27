@@ -1,25 +1,33 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import cn from 'classnames'
 import styles from './Ticket.module.scss'
-import { TId } from '../../store/tickets/ticketsReducer'
-import { useSelector } from 'react-redux'
+import { dragTicket, TId } from '../../store/tickets/ticketsReducer'
+import { useDispatch, useSelector } from 'react-redux'
 import { getTicketById } from '../../store/tickets/ticketsSelectors'
 import { Link } from 'react-router-dom'
 import { Tag } from '../Tag/Tag'
 import hasDescription from '../../assets/description.svg'
 import hasComments from '../../assets/comments.svg'
 import { Button } from '../Button/Button'
-import { useRedirect } from '../../hooks/useRedirect'
+
 interface ITicketProps {
   ticketId: TId
 }
 
 export const Ticket = ({ ticketId }: ITicketProps) => {
-  const { title, description, tags, commentsIds } = useSelector(
+  const { title, description, tags, commentsIds, type } = useSelector(
     getTicketById(ticketId)
   )
+  function dragStartHandler(e: React.DragEvent<HTMLDivElement>) {
+    e.dataTransfer.setData('draggableId', ticketId)
+    e.dataTransfer.setData('draggableColumn', type)
+  }
   return (
-    <div className={cn(styles.ticket)}>
+    <div
+      className={cn(styles.ticket)}
+      onDragStart={dragStartHandler}
+      id={ticketId}
+      draggable>
       <Link
         aria-label='Edit ticket'
         to={`edit/${ticketId}`}

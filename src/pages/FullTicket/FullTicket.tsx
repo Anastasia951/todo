@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './FullTicket.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, Outlet, useParams } from 'react-router-dom'
+import { Link, Outlet, useNavigate, useParams } from 'react-router-dom'
 import { getTicketById } from '../../store/tickets/ticketsSelectors'
 import { Input } from '../../components/Input/Input'
 import { Tag } from '../../components/Tag/Tag'
@@ -12,11 +12,12 @@ import { Popup } from '../../components/Popup/Popup'
 import { useFormik } from 'formik'
 import { ITicket } from '../../models/TStore'
 import { useRedirect } from '../../hooks/useRedirect'
-import { editTicket } from '../../store/tickets/ticketsReducer'
+import { deleteTicket, editTicket } from '../../store/tickets/ticketsReducer'
 
 export type formMode = 'delete' | 'editing' | 'default'
 
 export const FullTicket = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const [isOpened, setIsOpened] = useState(false)
   const [mode, setMode] = useState<formMode>('default')
@@ -38,7 +39,15 @@ export const FullTicket = () => {
       setMode('default')
     },
   })
+  useEffect(() => {
+    if (mode === 'delete') {
+      dispatch(deleteTicket({ type: ticket.type, id }))
+      navigate('/')
+      // return null
+    }
+  }, [mode])
   if (!ticket) return <></>
+
   function togglePopup() {
     setIsOpened(p => !p)
   }

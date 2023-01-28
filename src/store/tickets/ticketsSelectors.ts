@@ -13,7 +13,7 @@ export const getInProgressTicketsIds = (state: AppState): TId[] =>
 export const getDoneTicketsIds = (state: AppState): TId[] => state.tickets.done
 
 export const getTicketById = (id: TId) => (state: AppState) =>
-  state.tickets.tickets[id]
+  state.tickets.tickets[id] || null
 
 export const getTicketsByType =
   (type: 'todo' | 'inProgress' | 'done') => (state: AppState) => {

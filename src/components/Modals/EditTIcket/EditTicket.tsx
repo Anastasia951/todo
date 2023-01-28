@@ -27,11 +27,11 @@ export const EditTicket = () => {
   })
   const formik = useFormik<ITicket>({
     initialValues: {
-      title: ticket.title,
-      description: ticket.description,
-      tags: ticket.tags,
-      type: ticket.type,
-      commentsIds: ticket.commentsIds,
+      title: ticket?.title,
+      description: ticket?.description,
+      tags: ticket?.tags,
+      type: ticket?.type,
+      commentsIds: ticket?.commentsIds,
     },
     validateOnMount: true,
     validationSchema,
@@ -47,35 +47,39 @@ export const EditTicket = () => {
       formik.values.tags.filter(tag => tag !== color)
     )
   }
-  return (
-    <div className={styles.content}>
-      <h4 className={styles.title}>Редактировать тикет</h4>
-      <form onSubmit={formik.handleSubmit} className={styles.form}>
-        <Input
-          name='title'
-          onChange={formik.handleChange}
-          fullWidth
-          value={formik.values.title}
-        />
-        <Input
-          name='description'
-          onChange={formik.handleChange}
-          fullWidth
-          value={formik.values.description}
-          multiline
-        />
-        {Boolean(formik.values.tags.length) && (
-          <div className={styles.tags}>
-            {formik.values.tags.map(color => (
-              <Tag key={color} color={color} onDelete={deleteTag} editable />
-            ))}
-          </div>
-        )}
-        <MultiSelect formik={formik} values={formik.values.tags} />
-        <Button disabled={!formik.isValid} variant='primary' type='submit'>
-          Сохранить
-        </Button>
-      </form>
-    </div>
-  )
+  if (ticket) {
+    return (
+      <div className={styles.content}>
+        <h4 className={styles.title}>Редактировать тикет</h4>
+        <form onSubmit={formik.handleSubmit} className={styles.form}>
+          <Input
+            name='title'
+            onChange={formik.handleChange}
+            fullWidth
+            value={formik.values.title}
+          />
+          <Input
+            name='description'
+            onChange={formik.handleChange}
+            fullWidth
+            value={formik.values.description}
+            multiline
+          />
+          {Boolean(formik.values.tags.length) && (
+            <div className={styles.tags}>
+              {formik.values.tags.map(color => (
+                <Tag key={color} color={color} onDelete={deleteTag} editable />
+              ))}
+            </div>
+          )}
+          <MultiSelect formik={formik} values={formik.values.tags} />
+          <Button disabled={!formik.isValid} variant='primary' type='submit'>
+            Сохранить
+          </Button>
+        </form>
+      </div>
+    )
+  } else {
+    return <></>
+  }
 }

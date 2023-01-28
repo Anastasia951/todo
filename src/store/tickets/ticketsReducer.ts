@@ -65,6 +65,15 @@ const ticketsReducer = createSlice({
       if (isBottomHalf) indexBefore++
       state[endColumn].splice(indexBefore, 0, draggableId)
     },
+
+    deleteTicket(
+      state,
+      { payload }: PayloadAction<{ id: string; type: TTicketType }>
+    ) {
+      const { id, type } = payload
+      delete state.tickets[id]
+      state[type] = state[type].filter(el => el !== id)
+    },
   },
 })
 
@@ -74,5 +83,6 @@ export const {
   saveTickets,
   pushCommentId,
   dragTicket,
+  deleteTicket,
 } = ticketsReducer.actions
 export default ticketsReducer.reducer
